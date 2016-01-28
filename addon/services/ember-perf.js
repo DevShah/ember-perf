@@ -75,7 +75,7 @@ export default Base.extend(Evented, {
    * @public
    */
   measureRender() {
-    this.transitionData = null;
+    //this.transitionData = null;
 
     let deferred = defer(`measureRender`);
 
