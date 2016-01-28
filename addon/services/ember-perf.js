@@ -65,7 +65,7 @@ export default Base.extend(Evented, {
       Ember.run.scheduleOnce('afterRender', () => {
         this.trigger('transitionComplete', event);
       });
-    });
+    }, function(){console.log("REJECTED")});
   },
 
   /**
