@@ -59,13 +59,21 @@ export default Base.extend(Evented, {
       destURL: transitionUrl,
       destRoute: transitionRoute
     });
-    transitionInfo.promise.then(() => {
-      this.transitionData.finish();
-      const event = this.transitionData;
-      Ember.run.scheduleOnce('afterRender', () => {
-        this.trigger('transitionComplete', event);
+
+    var finishTransition = function () {
+      _this2.transitionData.finish();
+      var event = _this2.transitionData;
+      Ember['default'].run.scheduleOnce('afterRender', function () {
+        _this2.trigger('transitionComplete', event);
       });
-    }, function(){console.log("REJECTED")});
+    }
+
+
+    transitionInfo.promise.then(() => {
+      finishTransition();
+    }, function(){
+      finishTransition();
+    });
   },
 
   /**
@@ -75,7 +83,7 @@ export default Base.extend(Evented, {
    * @public
    */
   measureRender() {
-    //this.transitionData = null;
+    this.transitionData = null;
 
     let deferred = defer(`measureRender`);
 
