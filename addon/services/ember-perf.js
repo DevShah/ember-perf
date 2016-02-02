@@ -61,10 +61,10 @@ export default Base.extend(Evented, {
     });
 
     var finishTransition = function () {
-      _this2.transitionData.finish();
-      var event = _this2.transitionData;
+      this.transitionData.finish();
+      var event = this.transitionData;
       Ember['default'].run.scheduleOnce('afterRender', function () {
-        _this2.trigger('transitionComplete', event);
+        this.trigger('transitionComplete', event);
       });
     }
 
