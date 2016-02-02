@@ -59,6 +59,9 @@ export default Base.extend(Evented, {
       destURL: transitionUrl,
       destRoute: transitionRoute
     });
+
+    var dat = this;
+
     transitionInfo.promise.then(() => {
       this.transitionData.finish();
       const event = this.transitionData;
@@ -66,10 +69,10 @@ export default Base.extend(Evented, {
         this.trigger('transitionComplete', event);
       });
     }, function(){
-      this.transitionData.finish();
-      const event = this.transitionData;
+      dat.transitionData.finish();
+      const event = dat.transitionData;
       Ember.run.scheduleOnce('afterRender', () => {
-        this.trigger('transitionComplete', event);
+        dat.trigger('transitionComplete', event);
       });
     });
   },
